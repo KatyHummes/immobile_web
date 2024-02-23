@@ -4,6 +4,7 @@ use App\Http\Controllers\ImmobileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,5 +33,5 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', [ImmobileController::class, 'index'])->name('dashboard');
     Route::get('/immobiles', [ImmobileController::class, 'create'])->name('create');
-    Route::post('/immobiles', [ImmobileController::class, 'store'])->name('store');
+    Route::post('/immobiles', [ImmobileController::class, 'store'])->name('store')->middleware([HandlePrecognitiveRequests::class]);
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ImmobileRequest;
 use App\Models\Immobile;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -18,14 +19,12 @@ class ImmobileController extends Controller
         return Inertia::render('Create');
     }
 
-    public function store(Request $request)
+    public function store(ImmobileRequest $request)
     {
-        $request->validate([
-            'title' => ['required', 'max:255'],
-            'description' => ['required'],
-            'price' => ['required', 'numeric'],
+        Immobile::create([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
         ]);
-
-        Immobile::create($request->all());
     }
 }
