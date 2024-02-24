@@ -22,9 +22,16 @@ class ImmobileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:50'],
+            'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric'],
+            'street' => 'required|string|max:255',
+            'number' => 'required|numeric',
+            'neighborhood' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'state' => 'required|string|',
+            // 'photos' => 'required|array',
+            // 'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 
@@ -33,7 +40,10 @@ class ImmobileRequest extends FormRequest
             'required' => 'Este campo é obrigatório',
             'string' => 'É um campo de texto obrigatório',
             'numeric' => 'É um campo numérico obrigatório',
-            'max' => 'O campo deve ter no máximo 50 caracteres',
+            'max' => 'O campo deve ter no máximo 255 caracteres',
+            'photos.*.image' => 'O arquivo deve ser uma imagem',
+            'photos.*.mimes' => 'O arquivo deve ser uma imagem',
+            'photos.*.max' => 'O arquivo deve ter no máximo 2MB',
         ];
     }
 }

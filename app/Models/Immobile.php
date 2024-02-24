@@ -13,5 +13,15 @@ class Immobile extends Model
         'title',
         'description',
         'price',
+        'street',
+        'number',
+        'neighborhood',
+        'city',
+        'state',
     ];
+
+    public function Photos()
+    {
+        return $this->hasMany(Photo::class);
+    }
 }

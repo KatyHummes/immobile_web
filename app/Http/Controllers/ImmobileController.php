@@ -16,15 +16,24 @@ class ImmobileController extends Controller
 
     public function create()
     {
-        return Inertia::render('Create');
+        $immobile = Immobile::with('photos')->get();
+        return Inertia::render('Create', [
+            'immobile' => $immobile
+        ]);
     }
 
     public function store(ImmobileRequest $request)
     {
+        // dd($request->all())
         Immobile::create([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'price' => $request->input('price'),
+            'title' => $request->title,
+            'description' => $request->description,
+            'price' => $request->price,
+            'street' => $request->street,
+            'number' => $request->number,
+            'neighborhood' => $request->neighborhood,
+            'city' => $request->city,
+            'state' => $request->state,
         ]);
     }
 }

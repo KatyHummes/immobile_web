@@ -11,17 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('immobiles', function (Blueprint $table) {
+        Schema::create('photos', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->float('price', 8, 2);
-            $table->string('street');
-            $table->integer('number');
-            $table->string('neighborhood');
-            $table->string('city');
-            $table->string('state');
+            $table->unsignedBigInteger('Immobile_id');
+            $table->string('photo_path');
             $table->timestamps();
+            $table->foreign('Immobile_id')->references('id')->on('immobiles')->onDelete('cascade');
         });
     }
 
@@ -30,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('immobiles');
+        Schema::dropIfExists('photos');
     }
 };
