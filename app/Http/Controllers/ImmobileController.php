@@ -9,11 +9,6 @@ use Inertia\Inertia;
 
 class ImmobileController extends Controller
 {
-    public function index()
-    {
-        return Inertia::render('Dashboard');
-    }
-
     public function create()
     {
         $immobile = Immobile::with('photos')->get();
@@ -46,4 +41,5 @@ class ImmobileController extends Controller
             }
         }
     }
+
 }

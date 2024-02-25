@@ -18,9 +18,9 @@ const props = defineProps({
 const form = useForm('post', route('store'), {
     title: '',
     description: '',
-    price: null,
+    price: '',
     street: '',
-    number: null,
+    number: '',
     neighborhood: '',
     city: '',
     state: '',
@@ -34,8 +34,13 @@ const CreateSubmit = () => form.submit({
 
 const onPhotoChange = (event) => {
     form.photos = [];
+    form.photoPreviews = []; // Adicionar um array para armazenar as pré-visualizações
+
     for (let i = 0; i < event.target.files.length; i++) {
-        form.photos.push(event.target.files[i]);
+        const file = event.target.files[i];
+        form.photos.push(file);
+        const previewUrl = URL.createObjectURL(file); // Cria um URL para a foto
+        form.photoPreviews.push(previewUrl); // Armazena o URL para pré-visualização
     }
 };
 
@@ -46,9 +51,7 @@ const states = ref([
     'Piauí', 'Rio de Janeiro', 'Rio Grande do Norte', 'Rio Grande do Sul', 'Rondônia', 'Roraima', 'Santa Catarina', 'São Paulo', 'Sergipe', 'Tocantins'
 ]);
 
-const showSuccess = () => {
-    toast.add({ severity: 'success', summary: 'Success Message', detail: 'Message Content', life: 3000 });
-};
+
 </script>
 
 <template>
@@ -115,9 +118,15 @@ const showSuccess = () => {
                     </div>
                     <div class="mb-4">
                         <label for="photos" class="font-bold block mb-2">Fotos:</label>
-                        <input type="file" @change="onPhotoChange" multiple class="w-full">
+                        <input type="file" @change="onPhotoChange" multiple class="w-full border-gray-300 rounded-lg">
                         <div v-if="form.invalid('photos')" class="font-semibold text-red-500">
                             {{ form.errors.photos }}
+                        </div>
+                        <!-- Container para pré-visualizações de fotos com Tailwind CSS -->
+                        <div class="flex flex-wrap -m-1">
+                            <div v-for="(previewUrl, index) in form.photoPreviews" :key="index" class="p-1">
+                                <img :src="previewUrl" class="h-24 w-24 object-cover rounded-lg" />
+                            </div>
                         </div>
                     </div>
 

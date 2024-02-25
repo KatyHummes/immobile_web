@@ -5,7 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
-
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,21 +17,14 @@ use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [HomeController::class, 'show'])->name('dashboard');
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', [ImmobileController::class, 'index'])->name('dashboard');
     Route::get('/immobiles', [ImmobileController::class, 'create'])->name('create');
     Route::post('/immobiles', [ImmobileController::class, 'store'])->name('store')->middleware([HandlePrecognitiveRequests::class]);
 });
