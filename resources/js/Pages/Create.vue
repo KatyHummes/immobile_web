@@ -6,7 +6,10 @@ import InputNumber from 'primevue/inputnumber';
 import Textarea from 'primevue/textarea';
 import InputText from 'primevue/inputtext';
 import Dropdown from 'primevue/dropdown';
-
+import FileUpload from 'primevue/fileupload';
+import { useToast } from "primevue/usetoast";
+import Toast from 'primevue/toast';
+const toast = useToast();
 
 const props = defineProps({
     immobile: Object,
@@ -15,9 +18,9 @@ const props = defineProps({
 const form = useForm('post', route('store'), {
     title: '',
     description: '',
-    price: '',
+    price: null,
     street: '',
-    number: '',
+    number: null,
     neighborhood: '',
     city: '',
     state: '',
@@ -29,18 +32,27 @@ const CreateSubmit = () => form.submit({
     onSuccess: () => form.reset(),
 });
 
+const onPhotoChange = (event) => {
+    form.photos = [];
+    for (let i = 0; i < event.target.files.length; i++) {
+        form.photos.push(event.target.files[i]);
+    }
+};
 
 
 const states = ref([
     'Acre', 'Alagoas', 'Amapá', 'Amazonas', 'Bahia', 'Ceará', 'Distrito Federal', 'Espírito Santo', 'Goiás',
     'Maranhão', 'Mato Grosso', 'Mato Grosso do Sul', 'Minas Gerais', 'Pará', 'Paraíba', 'Paraná', 'Pernambuco',
-    'Piauí', 'Rio de Janeiro', 'Rio Grande do Norte', 'Rondônia', 'Roraima', 'Santa Catarina', 'São Paulo', 'Sergipe', 'Tocantins'
+    'Piauí', 'Rio de Janeiro', 'Rio Grande do Norte', 'Rio Grande do Sul', 'Rondônia', 'Roraima', 'Santa Catarina', 'São Paulo', 'Sergipe', 'Tocantins'
 ]);
 
-
+const showSuccess = () => {
+    toast.add({ severity: 'success', summary: 'Success Message', detail: 'Message Content', life: 3000 });
+};
 </script>
 
 <template>
+    <Toast />
     <AppLayout title="Dashboard">
         <div class="m-7 p-5 bg-white rounded-lg">
             <form @submit.prevent="CreateSubmit">
@@ -54,8 +66,7 @@ const states = ref([
                     </div>
                     <div class="mb-4">
                         <label class="font-bold block mb-2">Preço:*</label>
-                        <InputNumber v-model="form.price" mode="currency" showButtons currency="BRL" :min="0" :max="100"
-                            class="w-full" />
+                        <InputNumber v-model="form.price" mode="currency" showButtons currency="BRL" class="w-full" />
                         <div v-if="form.invalid('price')" class="font-semibold text-red-500">
                             {{ form.errors.price }}
                         </div>
@@ -102,9 +113,17 @@ const states = ref([
                             {{ form.errors.description }}
                         </div>
                     </div>
-                  
+                    <div class="mb-4">
+                        <label for="photos" class="font-bold block mb-2">Fotos:</label>
+                        <input type="file" @change="onPhotoChange" multiple class="w-full">
+                        <div v-if="form.invalid('photos')" class="font-semibold text-red-500">
+                            {{ form.errors.photos }}
+                        </div>
+                    </div>
+
                 </div>
                 <div class="mb-4">
+
                     <button type="submit"
                         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Salvar</button>
                 </div>

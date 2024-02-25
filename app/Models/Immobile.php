@@ -20,7 +20,7 @@ class Immobile extends Model
         'state',
     ];
 
-    public function Photos()
+    public function photos()
     {
         return $this->hasMany(Photo::class);
     }

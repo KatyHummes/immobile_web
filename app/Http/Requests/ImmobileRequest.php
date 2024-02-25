@@ -31,7 +31,7 @@ class ImmobileRequest extends FormRequest
             'city' => 'required|string|max:255',
             'state' => 'required|string|',
             // 'photos' => 'required|array',
-            // 'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 

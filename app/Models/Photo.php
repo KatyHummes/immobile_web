@@ -10,11 +10,11 @@ class Photo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'product_id',
+        'immobile_id',
         'photo_path',
     ];
 
-    public function Immobile()
+    public function immobile()
     {
         return $this->belongsTo(Immobile::class);
     }
