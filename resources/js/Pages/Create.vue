@@ -6,9 +6,9 @@ import InputNumber from 'primevue/inputnumber';
 import Textarea from 'primevue/textarea';
 import InputText from 'primevue/inputtext';
 import Dropdown from 'primevue/dropdown';
-import FileUpload from 'primevue/fileupload';
 import { useToast } from "primevue/usetoast";
 import Toast from 'primevue/toast';
+
 const toast = useToast();
 
 const props = defineProps({
@@ -29,18 +29,29 @@ const form = useForm('post', route('store'), {
 
 const CreateSubmit = () => form.submit({
     preserveScroll: true,
-    onSuccess: () => form.reset(),
+    onSuccess: () => {
+        form.reset()
+        form.photoPreviews = []
+        toast.add(
+            { severity: 'success', summary: 'Sucesso', detail: 'Imóvel cadastrado com sucesso', life: 3000 }
+        );
+    },
+    onError: () => {
+        toast.add(
+            { severity: 'error', summary: 'Erro', detail: 'Erro ao cadastrar imóvel', life: 3000 }
+        );
+    }
 });
 
 const onPhotoChange = (event) => {
     form.photos = [];
-    form.photoPreviews = []; // Adicionar um array para armazenar as pré-visualizações
+    form.photoPreviews = []; 
 
     for (let i = 0; i < event.target.files.length; i++) {
         const file = event.target.files[i];
         form.photos.push(file);
-        const previewUrl = URL.createObjectURL(file); // Cria um URL para a foto
-        form.photoPreviews.push(previewUrl); // Armazena o URL para pré-visualização
+        const previewUrl = URL.createObjectURL(file); 
+        form.photoPreviews.push(previewUrl); 
     }
 };
 
@@ -50,7 +61,6 @@ const states = ref([
     'Maranhão', 'Mato Grosso', 'Mato Grosso do Sul', 'Minas Gerais', 'Pará', 'Paraíba', 'Paraná', 'Pernambuco',
     'Piauí', 'Rio de Janeiro', 'Rio Grande do Norte', 'Rio Grande do Sul', 'Rondônia', 'Roraima', 'Santa Catarina', 'São Paulo', 'Sergipe', 'Tocantins'
 ]);
-
 
 </script>
 

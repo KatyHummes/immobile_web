@@ -19,12 +19,15 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [HomeController::class, 'show'])->name('dashboard');
+Route::get('/imovel/{id}', [HomeController::class, 'imovel'])->name('immobile.show');
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/immobiles', [ImmobileController::class, 'create'])->name('create');
-    Route::post('/immobiles', [ImmobileController::class, 'store'])->name('store')->middleware([HandlePrecognitiveRequests::class]);
+    Route::get('/criar-imovel', [ImmobileController::class, 'create'])->name('create');
+    Route::post('/criar-imovel', [ImmobileController::class, 'store'])->name('store')->middleware([HandlePrecognitiveRequests::class]);
 });
+
+

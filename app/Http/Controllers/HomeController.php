@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $immobiles = Immobile::all();
+        $immobiles = Immobile::get()->load('photos');
 
         $canLogin = Route::has('login');
         $canRegister = Route::has('register');
@@ -27,6 +27,14 @@ class HomeController extends Controller
         $immobiles = Immobile::all(); 
         return Inertia::render('Dashboard', [
             'immobiles' => $immobiles
+        ]);
+    }
+
+    public function imovel($id)
+    {
+        $immobile = Immobile::with('photos')->find($id);
+        return Inertia::render('Imovel', [
+            'immobile' => $immobile
         ]);
     }
 }

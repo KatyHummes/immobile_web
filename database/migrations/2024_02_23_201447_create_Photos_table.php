@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('immobile_id');
+            
             $table->string('photo_path');
             $table->timestamps();
+
             $table->foreign('immobile_id')->references('id')->on('immobiles')->onDelete('cascade');
         });
     }

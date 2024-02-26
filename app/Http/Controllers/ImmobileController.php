@@ -16,7 +16,7 @@ class ImmobileController extends Controller
             'immobile' => $immobile
         ]);
     }
-
+   
     public function store(ImmobileRequest $request)
     {
         // dd($request->photo());
@@ -34,7 +34,11 @@ class ImmobileController extends Controller
         if ($request->hasFile('photos')) {
             foreach ($request->file('photos') as $photo) {
                 $name = $photo->getClientOriginalName();
-                $path = $photo->storeAs('public/photos', $name);
+
+                // $path = $photo->store('public/photos/' . $user->id);
+                $path = $photo->store('public/photos');
+                $path = str_replace('public/', '', $path);
+
                 $immobile->photos()->create([
                     'photo_path' => $path 
                 ]);

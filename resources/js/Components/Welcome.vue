@@ -3,26 +3,6 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import { Link } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 
-
-const immobiles = ref([]);
-
-console.log('immobiles', immobiles.value);
-
-onMounted(() => {
-    fetch('/immobiles')
-    console.log(data)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            immobiles.value = data;
-            console.log('Immobiles fetched:', immobiles.value);
-        })
-        .catch(error => console.error('Erro ao buscar imóveis:', error));
-});
 </script>
 
 <template>

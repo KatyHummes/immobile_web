@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('immobiles', function (Blueprint $table) {
             $table->id();
+
             $table->string('title');
             $table->text('description');
             $table->float('price', 8, 2);
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->string('neighborhood');
             $table->string('city');
             $table->string('state');
+            
             $table->timestamps();
         });
     }
