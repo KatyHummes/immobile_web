@@ -28,6 +28,9 @@ Route::middleware([
 ])->group(function () {
     Route::get('/criar-imovel', [ImmobileController::class, 'create'])->name('create');
     Route::post('/criar-imovel', [ImmobileController::class, 'store'])->name('store')->middleware([HandlePrecognitiveRequests::class]);
+    
+    Route::post('/avaliacao', [ImmobileController::class, 'rating'])->name('rating')->middleware([HandlePrecognitiveRequests::class]);
+
 });
 
 
