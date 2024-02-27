@@ -18,7 +18,6 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/dashboard', [HomeController::class, 'show'])->name('dashboard');
 Route::get('/imovel/{id}', [HomeController::class, 'imovel'])->name('immobile.show');
 
 Route::middleware([
@@ -30,12 +29,7 @@ Route::middleware([
     Route::post('/criar-imovel', [ImmobileController::class, 'store'])->name('store')->middleware([HandlePrecognitiveRequests::class]);
     Route::get('/dashboard', [ImmobileController::class, 'show'])->name('dashboard');
     Route::delete('/delete/{id}', [ImmobileController::class, 'destroy'])->name('immobile.destroy');
-    Route::put('/imovel/{id}', [ImmobileController::class, 'update'])->name('immobile.update');
+    Route::put('/imovel/{id}', [ImmobileController::class, 'update'])->name('immobile.update')->middleware([HandlePrecognitiveRequests::class]);
 
     Route::post('/avaliacao/{id}', [HomeController::class, 'rating'])->name('rating')->middleware([HandlePrecognitiveRequests::class]);
-   
-    
-
 });
-
-

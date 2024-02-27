@@ -71,6 +71,7 @@ const submitComment = () => form.submit({
             </div>
             <!-- Immobile Info -->
             <div class="col-span-1 lg:col-span-1 border-slate-100 border-4 bg-white rounded-2xl p-4">
+                <h2 class="text-lg font-bold">Infomações Pricipais:</h2>
                 <div>
                     <h2 class="text-2xl font-bold">{{ immobile.title }}</h2>
                     <h3 class="text-xl font-semibold text-blue-600">Preço: {{ immobile.price }}</h3>
@@ -89,7 +90,7 @@ const submitComment = () => form.submit({
 
             <!-- comodidades  -->
             <div class="col-span-1 lg:col-span-1 border-slate-100 border-4 bg-white rounded-2xl p-4">
-
+                <h2 class="text-lg font-bold">Comodidades:</h2>
             </div>
             <!-- comentarios e avaliações -->
             <div class="col-span-1 lg:col-span-3 border-slate-100 border-4 bg-white rounded-2xl p-4">

@@ -70,6 +70,20 @@ class ImmobileController extends Controller
             'city' => $request->city,
             'state' => $request->state,
         ]);
+
+        if ($request->hasFile('photos')) {
+            $user = auth()->user();
+
+            foreach ($request->file('photos') as $photo) {
+                $path = $photo->store('public/photos/' . $user->id);
+                $path = str_replace('public/', '', $path);
+
+                $immobile->photos()->create([
+                    'photo_path' => $path,
+                    'user_id' => $user->id
+                ]);
+            }
+        }
     }
 
     public function destroy($id)
