@@ -24,15 +24,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function show()
-    {
-        $user = auth()->user();
-        $immobiles = Immobile::all();
-        return Inertia::render('Dashboard', [
-            'immobiles' => $immobiles,
-            'user' => $user,
-        ]);
-    }
+    
 
     public function imovel($id)
     {

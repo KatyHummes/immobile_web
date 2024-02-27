@@ -28,8 +28,13 @@ Route::middleware([
 ])->group(function () {
     Route::get('/criar-imovel', [ImmobileController::class, 'create'])->name('create');
     Route::post('/criar-imovel', [ImmobileController::class, 'store'])->name('store')->middleware([HandlePrecognitiveRequests::class]);
-    
+    Route::get('/dashboard', [ImmobileController::class, 'show'])->name('dashboard');
+    Route::delete('/delete/{id}', [ImmobileController::class, 'destroy'])->name('immobile.destroy');
+    Route::put('/imovel/{id}', [ImmobileController::class, 'update'])->name('immobile.update');
+
     Route::post('/avaliacao/{id}', [HomeController::class, 'rating'])->name('rating')->middleware([HandlePrecognitiveRequests::class]);
+   
+    
 
 });
 

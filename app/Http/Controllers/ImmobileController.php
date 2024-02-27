@@ -46,5 +46,35 @@ class ImmobileController extends Controller
         }
     }
 
-   
+    public function show()
+    {
+        $user = auth()->user();
+        $immobiles = Immobile::all();
+        return Inertia::render('Dashboard', [
+            'immobiles' => $immobiles,
+            'user' => $user,
+        ]);
+    }
+
+    public function update(ImmobileRequest $request, $id)
+    {
+        $immobile = Immobile::find($id);
+    
+        $immobile->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'price' => $request->price,
+            'street' => $request->street,
+            'number' => $request->number,
+            'neighborhood' => $request->neighborhood,
+            'city' => $request->city,
+            'state' => $request->state,
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $immobile = Immobile::findOrFail($id);
+        $immobile->delete();
+    }
 }

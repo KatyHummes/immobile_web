@@ -18,9 +18,9 @@ const props = defineProps({
 const form = useForm('post', route('store'), {
     title: '',
     description: '',
-    price: '',
+    price: 0,
     street: '',
-    number: '',
+    number: 0,
     neighborhood: '',
     city: '',
     state: '',
@@ -66,7 +66,7 @@ const states = ref([
 
 <template>
     <Toast />
-    <AppLayout title="Dashboard">
+    <AppLayout>
         <div class="m-7 p-5 bg-white rounded-lg">
             <form @submit.prevent="CreateSubmit">
                 <div class="grid md:grid-cols-3 gap-4">
