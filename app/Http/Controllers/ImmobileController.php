@@ -16,10 +16,10 @@ class ImmobileController extends Controller
             'immobile' => $immobile
         ]);
     }
-   
+
     public function store(ImmobileRequest $request)
     {
-        // dd($request->photo());
+        // dd($request->all());
         $immobile = Immobile::create([
             'title' => $request->title,
             'description' => $request->description,
@@ -32,18 +32,19 @@ class ImmobileController extends Controller
         ]);
 
         if ($request->hasFile('photos')) {
-            foreach ($request->file('photos') as $photo) {
-                $name = $photo->getClientOriginalName();
+            $user = auth()->user();
 
-                // $path = $photo->store('public/photos/' . $user->id);
-                $path = $photo->store('public/photos');
+            foreach ($request->file('photos') as $photo) {
+                $path = $photo->store('public/photos/' . $user->id);
                 $path = str_replace('public/', '', $path);
 
                 $immobile->photos()->create([
-                    'photo_path' => $path 
+                    'photo_path' => $path,
+                    'user_id' => $user->id
                 ]);
             }
         }
     }
 
+   
 }

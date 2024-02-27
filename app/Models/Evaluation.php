@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Evaluation extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id', 
         'immobile_id', 
-        'comment', 
+        'comment',
         'rating'
     ];
 
@@ -24,5 +24,4 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
 }

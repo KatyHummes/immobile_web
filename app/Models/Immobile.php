@@ -25,8 +25,8 @@ class Immobile extends Model
         return $this->hasMany(Photo::class);
     }
 
-    public function comments()
+    public function evaluations()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Evaluation::class);
     }
 }
