@@ -69,7 +69,7 @@ const states = ref([
     <Toast />
     <AppLayout>
         <div class="m-7 p-5 rounded-lg  border border-b-4 border-r-4 border-purple-200 bg-purple-50">
-            
+            <h2 class="text-lg font-bold m-4">Infomações Pricipais:</h2>
             <form @submit.prevent="CreateSubmit">
                 <div class="grid md:grid-cols-3 gap-4">
                     <div class="mb-4">
@@ -151,6 +151,16 @@ const states = ref([
                     </div>
 
                 </div>
+                <h2 class="text-lg font-bold m-4">Comodidades:</h2>
+                <div>
+                    <div>
+
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+
                 <div class="mb-4">
                     <button type="submit"
                         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Salvar</button>

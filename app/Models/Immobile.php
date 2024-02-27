@@ -29,4 +29,9 @@ class Immobile extends Model
     {
         return $this->hasMany(Evaluation::class);
     }
+
+    public function amenities()
+    {
+        return $this->hasMany(Amenities::class);
+    }
 }
