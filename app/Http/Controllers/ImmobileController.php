@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImmobileRequest;
+use App\Models\Amenities;
 use App\Models\Immobile;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -39,11 +40,16 @@ class ImmobileController extends Controller
                 $path = str_replace('public/', '', $path);
 
                 $immobile->photos()->create([
-                    'photo_path' => $path,
-                    'user_id' => $user->id
+                    'photo_path' => $path
                 ]);
             }
         }
+
+        Amenities::create([
+            'immobile_id' => $immobile->id,
+            'Amenities' => $request->Amenities,
+            'rules' => $request->rules
+        ]);
     }
 
     public function show()

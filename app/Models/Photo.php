@@ -12,7 +12,6 @@ class Photo extends Model
     protected $fillable = [
         'immobile_id',
         'photo_path',
-        'user_id'
     ];
 
     public function immobile()

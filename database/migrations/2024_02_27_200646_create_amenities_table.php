@@ -13,12 +13,22 @@ return new class extends Migration
     {
         Schema::create('amenities', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('immobile_id');
-            $table->string('amenities');
-            $table->string('rules');
+            $table->boolean('tv');
+            $table->boolean('wifi');
+            $table->boolean('airConditioning');
+            $table->boolean('bathroom');
+            $table->boolean('moving');
+            $table->boolean('furnished');
+            $table->boolean('garage');
+            $table->boolean('ordinance');
+            $table->boolean('reservation');
+            $table->boolean('maintenance');
+            $table->boolean('payment');
+            $table->boolean('couple');
+            $table->boolean('Pets');
+            $table->boolean('Visits');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('immobile_id')->references('id')->on('immobiles')->onDelete('cascade');
         });
     }

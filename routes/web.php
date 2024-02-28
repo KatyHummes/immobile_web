@@ -30,6 +30,6 @@ Route::middleware([
     Route::get('/dashboard', [ImmobileController::class, 'show'])->name('dashboard');
     Route::delete('/delete/{id}', [ImmobileController::class, 'destroy'])->name('immobile.destroy');
     Route::put('/imovel/{id}', [ImmobileController::class, 'update'])->name('immobile.update')->middleware([HandlePrecognitiveRequests::class]);
-
+    
     Route::post('/avaliacao/{id}', [HomeController::class, 'rating'])->name('rating')->middleware([HandlePrecognitiveRequests::class]);
 });

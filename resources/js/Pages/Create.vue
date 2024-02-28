@@ -25,7 +25,21 @@ const form = useForm('post', route('store'), {
     neighborhood: '',
     city: '',
     state: '',
-    photos: []
+    photos: [],
+    tv: false,
+    wifi: false,
+    airConditioning: false,
+    bathroom: false,
+    moving: false,
+    furnished: false,
+    garage: false,
+    ordinance: false,
+    reservation: false,
+    maintenance: false,
+    payment: false,
+    couple: false,
+    Pets: false,
+    Visits: false,
 });
 
 const CreateSubmit = () => form.submit({
@@ -151,13 +165,74 @@ const states = ref([
                     </div>
 
                 </div>
-                <h2 class="text-lg font-bold m-4">Comodidades:</h2>
-                <div>
-                    <div>
 
+                <div class="grid md:grid-cols-2">
+
+                    <div class="grid grid-cols-2 md:grid-cols-3">
+                        <h2 class="text-lg font-bold m-4">Comodidades:</h2>
+                        <div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.tv" inputId="tv" :binary="true" />
+                                <label for="tv" class="ml-2">TV</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.wifi" inputId="wifi" :binary="true" />
+                                <label for="wifi" class="ml-2">Wifi</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.airConditioning" inputId="airConditioning" :binary="true" />
+                                <label for="airConditioning" class="ml-2">Ar Condicionado</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.bathroom" inputId="bathroom" :binary="true" />
+                                <label for="bathroom" class="ml-2">Banheiro Privado</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.moving" inputId="moving" :binary="true" />
+                                <label for="moving" class="ml-2">Auxilio Mudança</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.furnished" inputId="furnished" :binary="true" />
+                                <label for="furnished" class="ml-2">Imóvel Mobiliado</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.ordinance" inputId="ordinance" :binary="true" />
+                                <label for="ordinance" class="ml-2">Postaria 24</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.reservation" inputId="reservation" :binary="true" />
+                                <label for="reservation" class="ml-2">Reserva Segura</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.maintenance" inputId="maintenance" :binary="true" />
+                                <label for="maintenance" class="ml-2">Manutenção</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.payment" inputId="payment" :binary="true" />
+                                <label for="payment" class="ml-2">Contas Inclusas</label>
+                            </div>
+                        </div>
                     </div>
                     <div>
-
+                        <h2 class="text-lg font-bold m-4">Regras:</h2>
+                        <div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.couple" inputId="couple" :binary="true" />
+                                <label for="couple" class="ml-2">Casal</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.smoker" inputId="smoker" :binary="true" />
+                                <label for="smoker" class="ml-2">Fumante</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.tv" inputId="tv" :binary="true" />
+                                <label for="tv" class="ml-2">Animais de Estimção</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.tv" inputId="tv" :binary="true" />
+                                <label for="tv" class="ml-2">Visitas</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

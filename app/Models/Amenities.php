@@ -11,15 +11,24 @@ class Amenities extends Model
 
     protected $fillable = [
         'immobile_id',
-        'rules',
-        'Amenities',
-        'rules'
+        'tv',
+        'wifi',
+        'airConditioning',
+        'bathroom',
+        'moving',
+        'furnished',
+        'garage',
+        'ordinance',
+        'reservation',
+        'maintenance',
+        'payment',
+        'couple',
+        'Pets',
+        'Visits'
     ];
 
     public function immobile()
     {
         return $this->belongsTo(Immobile::class);
     }
-
-    
 }

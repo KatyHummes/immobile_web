@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Amenities;
 use App\Models\Evaluation;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -24,8 +25,6 @@ class HomeController extends Controller
         ]);
     }
 
-    
-
     public function imovel($id)
     {
         $immobile = Immobile::with(['photos', 'evaluations', 'evaluations.user'])->find($id);
@@ -46,4 +45,6 @@ class HomeController extends Controller
             'rating' => 5
         ]);
     }
+
+    
 }
