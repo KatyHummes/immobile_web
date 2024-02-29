@@ -33,6 +33,6 @@ class Immobile extends Model
 
     public function amenitie()
     {
-        return $this->belongsTo(Amenitie::class);
+        return $this->hasOne(Amenitie::class);
     }
 }

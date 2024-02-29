@@ -9,6 +9,8 @@ import InputText from 'primevue/inputtext';
 import Dropdown from 'primevue/dropdown';
 import { useToast } from "primevue/usetoast";
 import Toast from 'primevue/toast';
+import Checkbox from 'primevue/checkbox';
+
 
 const toast = useToast();
 
@@ -31,7 +33,22 @@ const form = ref({
     neighborhood: '',
     city: '',
     state: '',
-    photos: []
+    photos: [],
+    tv: false,
+    wifi: false,
+    air_conditioning: false,
+    bathroom: false,
+    moving: false,
+    furnished: false,
+    garage: false,
+    ordinance: false,
+    reservation: false,
+    maintenance: false,
+    payment: false,
+    couple: false,
+    smoker: false,
+    pets: false,
+    visits: false,
 });
 
 const openEditModal = (immobileData) => {
@@ -51,7 +68,22 @@ const openEditModal = (immobileData) => {
         neighborhood: immobileData.neighborhood,
         city: immobileData.city,
         state: immobileData.state,
-        photos: immobileData.photos
+        photos: immobileData.photos,
+        tv: immobileData.tv,
+        wifi: immobileData.wifi,
+        air_conditioning: immobileData.air_conditioning,
+        bathroom: immobileData.bathroom,
+        moving: immobileData.moving,
+        furnished: immobileData.furnished,
+        garage: immobileData.garage,
+        ordinance: immobileData.ordinance,
+        reservation: immobileData.reservation,
+        maintenance: immobileData.maintenance,
+        payment: immobileData.payment,
+        couple: immobileData.couple,
+        smoker: immobileData.smoker,
+        pets: immobileData.pets,
+        visits: immobileData.visits,
     });
 };
 
@@ -79,14 +111,13 @@ const updateImmobile = () => {
 
 // confg da modal deletar Anúncios
 const deleteModal = ref(false);
-const formDelete = ref({
-    id: 0
-});
+const formDelete = ref();
 
 const openDeleteModal = (id) => {
+    console.log(id)
     deleteModal.value = true;
-    formDelete.value = useForm('delete', `/delete/${immobile.value.id}`, {
-        id: immobile.value.id
+    formDelete.value = useForm('delete', `/delete/${id}`, {
+        id: immobile.id
     });
 };
 
@@ -145,7 +176,7 @@ const states = ref([
                 <div class="bg-purple-50 overflow-hidden shadow-xl sm:rounded-lg">
                     <div v-for="immobile in immobiles" :key="immobiles.id"
                         class="flex justify-between items-center m-4 p-4 rounded-xl border border-b-4 border-r-4 border-purple-200 bg-purple-100">
-                        <h2>Título:{{ immobile.title }}</h2>
+                        <h2>Título:{{ immobile.title }} - {{ immobile.id }}</h2>
                         <h2>Preço:{{ immobile.price }}</h2>
                         <h2>Estado:{{ immobile.state }}</h2>
                         <div class="flex flex-row justify-between items-center gap-5">
@@ -196,7 +227,7 @@ const states = ref([
     </Modal>
 
     <!-- modal para edição de anúncio -->
-    <Modal :show="editModal" @close="closeEditModal" class="">
+    <Modal :show="editModal" @close="closeEditModal" class="" max-width="7xl">
         <div class="flex items-start justify-between p-4 border-b rounded-t">
             <h3 class="text-xl font-semibold text-[var(--text-color)] ">
                 Editar Anúncio
@@ -210,68 +241,76 @@ const states = ref([
                 <span class="sr-only">Close modal</span>
             </button>
         </div>
-        <div class="p-6 bg-purple-50">
+        <div class="p-6 bg-purple-50"  >
             <form @submit.prevent="updateImmobile">
-                <div class="grid md:grid-cols-2 gap-4">
+                <div class="grid md:grid-cols-3 gap-4">
                     <div class="mb-4">
                         <label for="title" class="font-bold block mb-2">Título:*</label>
-                        <InputText v-model="form.title" class="w-full border border-b-4 border-r-4 border-purple-200 bg-purple-100" />
+                        <InputText v-model="form.title"
+                            class="w-full  border border-b-4 border-r-4 border-purple-200 bg-purple-100" />
                         <div v-if="form.invalid('title')" class="font-semibold text-red-500">
                             {{ form.errors.title }}
                         </div>
                     </div>
                     <div class="mb-4">
                         <label class="font-bold block mb-2">Preço:*</label>
-                        <InputNumber v-model="form.price" mode="currency" showButtons currency="BRL" class="w-full border border-b-4 border-r-4 border-purple-200 bg-purple-100" />
+                        <InputNumber v-model="form.price" mode="currency" currency="BRL"
+                            class="w-full border border-b-4 border-r-4 border-purple-200 bg-purple-100" />
                         <div v-if="form.invalid('price')" class="font-semibold text-red-500">
                             {{ form.errors.price }}
                         </div>
                     </div>
                     <div class="mb-4">
                         <label for="street" class="font-bold block mb-2">Rua:</label>
-                        <InputText v-model="form.street" class="w-full border border-b-4 border-r-4 border-purple-200 bg-purple-100" />
+                        <InputText v-model="form.street"
+                            class="w-full  border border-b-4 border-r-4 border-purple-200 bg-purple-100" />
                         <div v-if="form.invalid('street')" class="font-semibold text-red-500">
                             {{ form.errors.street }}
                         </div>
                     </div>
                     <div>
                         <label for="number" class="font-bold block mb-2">Número:</label>
-                        <InputNumber v-model="form.number" class="w-full border border-b-4 border-r-4 border-purple-200 bg-purple-100" />
+                        <InputNumber v-model="form.number"
+                            class="w-full border border-b-4 border-r-4 border-purple-200 bg-purple-100" />
                         <div v-if="form.invalid('number')" class="font-semibold text-red-500">
                             {{ form.errors.number }}
                         </div>
                     </div>
                     <div class="mb-4">
                         <label for="neighborhood" class="font-bold block mb-2">Bairro:*</label>
-                        <InputText v-model="form.neighborhood" class="w-full border border-b-4 border-r-4 border-purple-200 bg-purple-100" />
+                        <InputText v-model="form.neighborhood"
+                            class="w-full  border border-b-4 border-r-4 border-purple-200 bg-purple-100" />
                         <div v-if="form.invalid('neighborhood')" class="font-semibold text-red-500">
                             {{ form.errors.neighborhood }}
                         </div>
                     </div>
                     <div class="mb-4">
                         <label for="city" class="font-bold block mb-2">Cidade:*</label>
-                        <InputText v-model="form.city" class="w-full border border-b-4 border-r-4 border-purple-200 bg-purple-100" />
+                        <InputText v-model="form.city"
+                            class="w-full  border border-b-4 border-r-4 border-purple-200 bg-purple-100" />
                         <div v-if="form.invalid('city')" class="font-semibold text-red-500">
                             {{ form.errors.city }}
                         </div>
                     </div>
                     <div class="mb-4">
                         <label for="state" class="font-bold block mb-2">Estado</label>
-                        <Dropdown v-model="form.state" :options="states" placeholder="Selecione a Cidade" class="w-full border border-b-4 border-r-4 border-purple-200 bg-purple-100" />
+                        <Dropdown v-model="form.state" :options="states" placeholder="Selecione a Cidade"
+                            class="w-full  border border-b-4 border-r-4 border-purple-200 bg-purple-100" />
                         <div v-if="form.invalid('state')" class="font-semibold text-red-500">
                             {{ form.errors.state }}
                         </div>
                     </div>
                     <div class="mb-4">
                         <label for="description" class="font-bold block mb-2">Descrição:*</label>
-                        <Textarea v-model="form.description" rows="5" cols="30" class="w-full border border-b-4 border-r-4 border-purple-200 bg-purple-100" />
+                        <Textarea v-model="form.description" rows="5" cols="30"
+                            class="w-full  border border-b-4 border-r-4 border-purple-200 bg-purple-100" />
                         <div v-if="form.invalid('description')" class="font-semibold text-red-500">
                             {{ form.errors.description }}
                         </div>
                     </div>
                     <div class="mb-4">
                         <label for="photos" class="font-bold block mb-2">Fotos:</label>
-                        <input type="file" @change="onPhotoChange" multiple class="w-full border border-b-4 border-r-4 border-purple-200 bg-purple-100">
+                        <input type="file" @change="onPhotoChange" multiple class="w-full border-gray-300 rounded-lg">
                         <div v-if="form.invalid('photos')" class="font-semibold text-red-500">
                             {{ form.errors.photos }}
                         </div>
@@ -279,6 +318,81 @@ const states = ref([
                         <div class="flex flex-wrap -m-1">
                             <div v-for="(previewUrl, index) in form.photoPreviews" :key="index" class="p-1">
                                 <img :src="previewUrl" class="h-24 w-24 object-cover rounded-lg" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="grid md:grid-cols-2">
+
+                    <div class="grid grid-cols-2 md:grid-cols-3">
+                        <h2 class="text-lg font-bold m-4">Comodidades:</h2>
+                        <div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.tv" inputId="tv" :binary="true" />
+                                <label for="tv" class="ml-2">TV</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.wifi" inputId="wifi" :binary="true" />
+                                <label for="wifi" class="ml-2">Wifi</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.air_conditioning" inputId="air-conditioning" :binary="true" />
+                                <label for="air-conditioning" class="ml-2">Ar Condicionado</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.bathroom" inputId="bathroom" :binary="true" />
+                                <label for="bathroom" class="ml-2">Banheiro Privado</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.moving" inputId="moving" :binary="true" />
+                                <label for="moving" class="ml-2">Auxilio Mudança</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.furnished" inputId="furnished" :binary="true" />
+                                <label for="furnished" class="ml-2">Imóvel Mobiliado</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.ordinance" inputId="ordinance" :binary="true" />
+                                <label for="ordinance" class="ml-2">Postaria 24</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.garage" inputId="garage" :binary="true" />
+                                <label for="garage" class="ml-2">Garagem</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.reservation" inputId="reservation" :binary="true" />
+                                <label for="reservation" class="ml-2">Reserva Segura</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.maintenance" inputId="maintenance" :binary="true" />
+                                <label for="maintenance" class="ml-2">Manutenção</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.payment" inputId="payment" :binary="true" />
+                                <label for="payment" class="ml-2">Contas Inclusas</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-bold m-4">Regras:</h2>
+                        <div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.couple" inputId="couple" :binary="true" />
+                                <label for="couple" class="ml-2">Casal</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.smoker" inputId="smoker" :binary="true" />
+                                <label for="smoker" class="ml-2">Fumante</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.pets" inputId="pets" :binary="true" />
+                                <label for="pets" class="ml-2">Animais de Estimção</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.visits" inputId="visits" :binary="true" />
+                                <label for="visits" class="ml-2">Visitas</label>
                             </div>
                         </div>
                     </div>

@@ -28,7 +28,7 @@ const form = useForm('post', route('store'), {
     photos: [],
     tv: false,
     wifi: false,
-    airConditioning: false,
+    air_conditioning: false,
     bathroom: false,
     moving: false,
     furnished: false,
@@ -38,14 +38,15 @@ const form = useForm('post', route('store'), {
     maintenance: false,
     payment: false,
     couple: false,
-    Pets: false,
-    Visits: false,
+    smoker: false,
+    pets: false,
+    visits: false,
 });
 
-const CreateSubmit = () => form.submit({
+const createSubmit = () => form.submit({
     preserveScroll: true,
     onSuccess: () => {
-        form.reset()
+        // form.reset()
         form.photoPreviews = []
         toast.add(
             { severity: 'success', summary: 'Sucesso', detail: 'Imóvel cadastrado com sucesso', life: 3000 }
@@ -75,8 +76,6 @@ const states = ref([
     'Maranhão', 'Mato Grosso', 'Mato Grosso do Sul', 'Minas Gerais', 'Pará', 'Paraíba', 'Paraná', 'Pernambuco',
     'Piauí', 'Rio de Janeiro', 'Rio Grande do Norte', 'Rio Grande do Sul', 'Rondônia', 'Roraima', 'Santa Catarina', 'São Paulo', 'Sergipe', 'Tocantins'
 ]);
-
-
 </script>
 
 <template>
@@ -84,7 +83,7 @@ const states = ref([
     <AppLayout>
         <div class="m-7 p-5 rounded-lg  border border-b-4 border-r-4 border-purple-200 bg-purple-50">
             <h2 class="text-lg font-bold m-4">Infomações Pricipais:</h2>
-            <form @submit.prevent="CreateSubmit">
+            <form @submit.prevent="createSubmit">
                 <div class="grid md:grid-cols-3 gap-4">
                     <div class="mb-4">
                         <label for="title" class="font-bold block mb-2">Título:*</label>
@@ -180,8 +179,8 @@ const states = ref([
                                 <label for="wifi" class="ml-2">Wifi</label>
                             </div>
                             <div class="flex align-items-center">
-                                <Checkbox v-model="form.airConditioning" inputId="airConditioning" :binary="true" />
-                                <label for="airConditioning" class="ml-2">Ar Condicionado</label>
+                                <Checkbox v-model="form.air_conditioning" inputId="air-conditioning" :binary="true" />
+                                <label for="air-conditioning" class="ml-2">Ar Condicionado</label>
                             </div>
                             <div class="flex align-items-center">
                                 <Checkbox v-model="form.bathroom" inputId="bathroom" :binary="true" />
@@ -198,6 +197,10 @@ const states = ref([
                             <div class="flex align-items-center">
                                 <Checkbox v-model="form.ordinance" inputId="ordinance" :binary="true" />
                                 <label for="ordinance" class="ml-2">Postaria 24</label>
+                            </div>
+                            <div class="flex align-items-center">
+                                <Checkbox v-model="form.garage" inputId="garage" :binary="true" />
+                                <label for="garage" class="ml-2">Garagem</label>
                             </div>
                             <div class="flex align-items-center">
                                 <Checkbox v-model="form.reservation" inputId="reservation" :binary="true" />
@@ -225,12 +228,12 @@ const states = ref([
                                 <label for="smoker" class="ml-2">Fumante</label>
                             </div>
                             <div class="flex align-items-center">
-                                <Checkbox v-model="form.tv" inputId="tv" :binary="true" />
-                                <label for="tv" class="ml-2">Animais de Estimção</label>
+                                <Checkbox v-model="form.pets" inputId="pets" :binary="true" />
+                                <label for="pets" class="ml-2">Animais de Estimção</label>
                             </div>
                             <div class="flex align-items-center">
-                                <Checkbox v-model="form.tv" inputId="tv" :binary="true" />
-                                <label for="tv" class="ml-2">Visitas</label>
+                                <Checkbox v-model="form.visits" inputId="visits" :binary="true" />
+                                <label for="visits" class="ml-2">Visitas</label>
                             </div>
                         </div>
                     </div>
