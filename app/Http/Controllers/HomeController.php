@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Amenities;
 use App\Models\Evaluation;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -27,7 +26,7 @@ class HomeController extends Controller
 
     public function imovel($id)
     {
-        $immobile = Immobile::with(['photos', 'evaluations', 'evaluations.user'])->find($id);
+        $immobile = Immobile::with(['photos', 'evaluations', 'evaluations.user', 'amenitie'])->find($id);
 
         return Inertia::render('Immobile', [
             'immobile' => $immobile,
@@ -46,5 +45,8 @@ class HomeController extends Controller
         ]);
     }
 
-    
+    public function destroy($id)
+    {
+        Evaluation::find($id)->delete();
+    }
 }

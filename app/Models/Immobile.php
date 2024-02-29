@@ -10,6 +10,7 @@ class Immobile extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'title',
         'description',
         'price',
@@ -30,8 +31,8 @@ class Immobile extends Model
         return $this->hasMany(Evaluation::class);
     }
 
-    public function amenities()
+    public function amenitie()
     {
-        return $this->hasMany(Amenities::class);
+        return $this->belongsTo(Amenitie::class);
     }
 }

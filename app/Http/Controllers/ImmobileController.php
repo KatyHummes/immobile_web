@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImmobileRequest;
-use App\Models\Amenities;
+use App\Models\Amenitie;
 use App\Models\Immobile;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ImmobileController extends Controller
@@ -22,6 +21,7 @@ class ImmobileController extends Controller
     {
         // dd($request->all());
         $immobile = Immobile::create([
+            'user_id' => auth()->user()->id,
             'title' => $request->title,
             'description' => $request->description,
             'price' => $request->price,
@@ -45,11 +45,25 @@ class ImmobileController extends Controller
             }
         }
 
-        Amenities::create([
+        Amenitie::create([
             'immobile_id' => $immobile->id,
-            'Amenities' => $request->Amenities,
-            'rules' => $request->rules
+            'tv' => $request->tv,
+            'wifi' => $request->wifi,
+            'air_conditioning' => $request->air_conditioning,
+            'bathroom' => $request->bathroom,
+            'moving' => $request->moving,
+            'furnished' => $request->furnished,
+            'garage' => $request->garage,
+            'ordinance' => $request->ordinance,
+            'reservation' => $request->reservation,
+            'maintenance' => $request->maintenance,
+            'payment' => $request->payment,
+            'couple' => $request->couple,
+            'smoker' => $request->smoker,
+            'pets' => $request->pets,
+            'visits' => $request->visits
         ]);
+
     }
 
     public function show()
@@ -64,8 +78,9 @@ class ImmobileController extends Controller
 
     public function update(ImmobileRequest $request, $id)
     {
+        // dd($request->all());
         $immobile = Immobile::find($id);
-    
+
         $immobile->update([
             'title' => $request->title,
             'description' => $request->description,
@@ -86,14 +101,32 @@ class ImmobileController extends Controller
 
                 $immobile->photos()->create([
                     'photo_path' => $path,
-                    'user_id' => $user->id
                 ]);
             }
         }
+
+        $immobile->amenitie->update([
+            'tv' => $request->tv,
+            'wifi' => $request->wifi,
+            'air_conditioning' => $request->air_conditioning,
+            'bathroom' => $request->bathroom,
+            'moving' => $request->moving,
+            'furnished' => $request->furnished,
+            'garage' => $request->garage,
+            'ordinance' => $request->ordinance,
+            'reservation' => $request->reservation,
+            'maintenance' => $request->maintenance,
+            'payment' => $request->payment,
+            'couple' => $request->couple,
+            'smoker' => $request->smoker,
+            'pets' => $request->pets,
+            'visits' => $request->visits
+        ]);
     }
 
     public function destroy($id)
     {
+        // dd($id);
         $immobile = Immobile::findOrFail($id);
         $immobile->delete();
     }

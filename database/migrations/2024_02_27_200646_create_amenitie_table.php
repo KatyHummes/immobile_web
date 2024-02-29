@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('immobile_id');
             $table->boolean('tv');
             $table->boolean('wifi');
-            $table->boolean('airConditioning');
+            $table->boolean('air_conditioning');
             $table->boolean('bathroom');
             $table->boolean('moving');
             $table->boolean('furnished');
@@ -26,8 +26,9 @@ return new class extends Migration
             $table->boolean('maintenance');
             $table->boolean('payment');
             $table->boolean('couple');
-            $table->boolean('Pets');
-            $table->boolean('Visits');
+            $table->boolean('smoker');
+            $table->boolean('pets');
+            $table->boolean('visits');
             $table->timestamps();
             $table->foreign('immobile_id')->references('id')->on('immobiles')->onDelete('cascade');
         });

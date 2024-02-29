@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Amenities extends Model
+class Amenitie extends Model
 {
     use HasFactory;
 
@@ -13,7 +13,7 @@ class Amenities extends Model
         'immobile_id',
         'tv',
         'wifi',
-        'airConditioning',
+        'air_conditioning',
         'bathroom',
         'moving',
         'furnished',
@@ -23,8 +23,9 @@ class Amenities extends Model
         'maintenance',
         'payment',
         'couple',
-        'Pets',
-        'Visits'
+        'smoker',
+        'pets',
+        'visits'
     ];
 
     public function immobile()

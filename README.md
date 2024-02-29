@@ -10,9 +10,9 @@ This practical challenge consists of creating a property sales website, for me i
 In this project, php, Laravel and Inertia were used for Backend development
 and for the database, I used MySQL.
 
-- Frontend:
+- Front-end:
 Developed a simple interface using Vue.js, Tailwind CSS
-and also PrimeVue for the components.
+and also PrimeVue for the components. And for the svg I chose the websites https://heroicons.com/ and https://heroicons.com/
 
 ### How to use:
   

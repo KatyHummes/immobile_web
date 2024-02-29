@@ -32,4 +32,5 @@ Route::middleware([
     Route::put('/imovel/{id}', [ImmobileController::class, 'update'])->name('immobile.update')->middleware([HandlePrecognitiveRequests::class]);
     
     Route::post('/avaliacao/{id}', [HomeController::class, 'rating'])->name('rating')->middleware([HandlePrecognitiveRequests::class]);
+    Route::delete('/delete-comentario/{id}', [HomeController::class, 'destroy'])->name('destroy.comment')->middleware([HandlePrecognitiveRequests::class]);
 });
