@@ -39,9 +39,9 @@ php artisan serve
 ```
 npm run dev
 ```
-- run the migrations:
+- run the migrations: (seeds are optional)
 ```
-php artisan migrate
+php artisan migrate --seed
 ```
 and finally run this command:
 ```
