@@ -69,21 +69,21 @@ const openEditModal = (immobileData) => {
         city: immobileData.city,
         state: immobileData.state,
         photos: immobileData.photos,
-        tv: immobileData.tv,
-        wifi: immobileData.wifi,
-        air_conditioning: immobileData.air_conditioning,
-        bathroom: immobileData.bathroom,
-        moving: immobileData.moving,
-        furnished: immobileData.furnished,
-        garage: immobileData.garage,
-        ordinance: immobileData.ordinance,
-        reservation: immobileData.reservation,
-        maintenance: immobileData.maintenance,
-        payment: immobileData.payment,
-        couple: immobileData.couple,
-        smoker: immobileData.smoker,
-        pets: immobileData.pets,
-        visits: immobileData.visits,
+        tv: translateData(immobileData.amenitie.tv),
+        wifi: translateData(immobileData.amenitie.wifi),
+        air_conditioning: translateData(immobileData.amenitie.air_conditioning),
+        bathroom: translateData(immobileData.amenitie.bathroom),
+        moving: translateData(immobileData.amenitie.moving),
+        furnished: translateData(immobileData.amenitie.furnished),
+        garage: translateData(immobileData.amenitie.garage),
+        ordinance: translateData(immobileData.amenitie.ordinance),
+        reservation: translateData(immobileData.amenitie.reservation),
+        maintenance:  translateData(immobileData.amenitie.maintenance),
+        payment: translateData(immobileData.amenitie.payment),
+        couple: translateData(immobileData.amenitie.couple),
+        smoker: translateData(immobileData.amenitie.smoker),
+        pets: translateData(immobileData.amenitie.pets),
+        visits: translateData(immobileData.amenitie.visits),
     });
 };
 
@@ -160,6 +160,14 @@ const states = ref([
     'Piauí', 'Rio de Janeiro', 'Rio Grande do Norte', 'Rio Grande do Sul', 'Rondônia', 'Roraima', 'Santa Catarina', 'São Paulo', 'Sergipe', 'Tocantins'
 ]);
 
+const translateData = (data) => {
+    if (data === 1) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 </script>
 
 <template>
@@ -197,8 +205,6 @@ const states = ref([
                             </button>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -241,7 +247,7 @@ const states = ref([
                 <span class="sr-only">Close modal</span>
             </button>
         </div>
-        <div class="p-6 bg-purple-50"  >
+        <div class="p-6 bg-purple-50">
             <form @submit.prevent="updateImmobile">
                 <div class="grid md:grid-cols-3 gap-4">
                     <div class="mb-4">
@@ -325,7 +331,6 @@ const states = ref([
                 </div>
 
                 <div class="grid md:grid-cols-2">
-
                     <div class="grid grid-cols-2 md:grid-cols-3">
                         <h2 class="text-lg font-bold m-4">Comodidades:</h2>
                         <div>

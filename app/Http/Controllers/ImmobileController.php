@@ -69,7 +69,7 @@ class ImmobileController extends Controller
     public function show()
     {
         $user = auth()->user();
-        $immobiles = Immobile::all();
+        $immobiles = Immobile::with('photos', 'amenitie')->get();
         return Inertia::render('Dashboard', [
             'immobiles' => $immobiles,
             'user' => $user,
@@ -78,7 +78,7 @@ class ImmobileController extends Controller
 
     public function update(ImmobileRequest $request, $id)
     {
-        // dd($request->all());
+        dd($request->all());
         $immobile = Immobile::find($id);
 
         $immobile->update([
