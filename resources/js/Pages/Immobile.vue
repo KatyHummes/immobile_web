@@ -62,8 +62,8 @@ const formDelete = ref();
 const openModalDelete = (id) => {
     console.log(id);
     deleteComment.value = true;
-    formDelete.value = useForm('delete', route('destroy.comment'), {
-        id: immobile.id,
+    formDelete.value = useForm('delete',`/delete-comentario/${id}`, {
+        id: id,
     });
 };
 
@@ -72,21 +72,24 @@ const closeModalDelete = () => {
     formDelete.value = null;
 };
 
-const submitDelete = () => formDelete.value.submit({
-    preserveScroll: true,
-    onSuccess: () => {
-        closeModalDelete();
-        toast.add(
-            { severity: 'success', summary: 'Sucesso', detail: 'Comentário deletado com sucesso', life: 3000 }
-        );
-    },
-    onError: () => {
-        closeModalDelete();
-        toast.add(
-            { severity: 'error', summary: 'Erro', detail: 'Erro ao deletar comentário', life: 3000 }
-        );
-    }
-});
+const submitDelete = () => {
+    formDelete.value.submit({
+        preserveScroll: true,
+        onSuccess: () => {
+            closeModalDelete();
+            toast.add(
+                { severity: 'success', summary: 'Sucesso', detail: 'Comentário deletado com sucesso', life: 3000 }
+            );
+        },
+        onError: () => {
+            closeModalDelete();
+            toast.add(
+                { severity: 'error', summary: 'Erro', detail: 'Erro ao deletar comentário', life: 3000 }
+            );
+        }
+    });
+};
+
 </script>
 
 <template>
@@ -509,7 +512,7 @@ const submitDelete = () => formDelete.value.submit({
                     </div>
                 </form>
                 <div v-for="evaluation in immobile.evaluations" :key="evaluation.id" class="mt-4">
-                    <div class="flex items-center">
+                    <div class="flex justify-between items-center">
                         <!-- <img :src="comment.user.profile_photo_url" alt="Foto do usuário" class="h-10 w-10 rounded-full"> -->
                         <div class="ml-2">
                             <div class="font-semibold">{{ evaluation.user.name }}</div>
@@ -541,7 +544,7 @@ const submitDelete = () => formDelete.value.submit({
                 <h2 class="text-lg font-bold">Deseja realmente excluir este comentário?</h2>
                 <div class="flex justify-between mt-4">
                     <Button label="Cancelar" @click="deleteComment = false" />
-                    <Button label="Excluir" type="submit" />
+                    <Button label="Excluir" @click="submitDelete" />
                 </div>
             </div>
         </form>

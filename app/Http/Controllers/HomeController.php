@@ -48,6 +48,7 @@ class HomeController extends Controller
 
     public function destroy($id)
     {
-        Evaluation::find($id)->delete();
+        // dd($id);
+        Evaluation::findOrFail($id)->delete();
     }
 }

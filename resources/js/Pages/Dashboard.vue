@@ -125,7 +125,7 @@ const closeDeleteModal = () => {
     deleteModal.value = false;
 };
 
-const deleteimmobile = () => {
+const deleteImmobile = () => {
     formDelete.value.submit({
         preserveScroll: true,
         onSuccess: () => {
@@ -206,7 +206,7 @@ const states = ref([
 
     <!-- modal para exclusão de anúncio -->
     <Modal :show="deleteModal" @close="closeDeleteModal">
-        <form @submit.prevent="deleteimmobile">
+        <form @submit.prevent="deleteImmobile">
             <h2 class="flex items-center justify-center p-4 m-4 font-bold text-text-color">Tem certeza que deseja
                 excluir este anúncio?</h2>
             <button @click="closeDeleteModal" type="button"

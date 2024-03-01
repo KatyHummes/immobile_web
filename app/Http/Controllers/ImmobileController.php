@@ -105,7 +105,7 @@ class ImmobileController extends Controller
             }
         }
 
-        $immobile->amenitie->update([
+        $immobile->update([
             'tv' => $request->tv,
             'wifi' => $request->wifi,
             'air_conditioning' => $request->air_conditioning,
